@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- 
+@author Nithin
+Description: This page is a facelet to allow the students to enter the survey data.
+ -->
+<h:head>
+	<title>Prospective Student Survey Form</title>
+</h:head>
+<h:body>
+	<h3 align="center">Welcome to Prospective Student Survey Form Page</h3>
+	<h:form>
+		<p>First Name:</p>
+		<p:inputText id="FirstName" value="#{survey.student.firstname}"
+			required="true" requiredMessage="Please enter the firstname"
+			validatorMessage="Enter only alphabetical text">
+			<f:validateLength maximum="15" />
+			<f:validateRegex pattern="^[a-zA-Z]+$" />
+		</p:inputText>
+		<p:message for="FirstName" style="color:blue" />
+		<br />
+		
+		<p>Last Name:</p>
+		<p:inputText id="LastName" value="#{survey.student.lastname}"
+			required="true" requiredMessage="Please enter the lastname"
+			validatorMessage="Enter only aplhabets ">
+			<f:validateLength maximum="15" />
+			<f:validateRegex pattern="^[a-zA-Z]+$" />
+		</p:inputText>
+		<p:message for="LastName" style="color:blue" />
+		<br />
+		
+		<p>Street Address:</p>
+		<p:inputText id="SAddress" value="#{survey.student.address}"
+			required="true" requiredMessage="Street Address  is mandatory"
+			validatorMessage="Enter only aplhanumeric text or special characters like '-' '/'">
+			<f:validateLength maximum="30" />
+			<f:validateRegex pattern="^[a-zA-Z0-9\\\-_ ]+$" />
+		</p:inputText>
+		<p:message for="SAddress" style="color:blue" />
+		<br />
+		
+		<p>ZipCode:</p>
+		<p:inputText id="zip" value="#{survey.student.zip}" required="true"
+			requiredMessage="Enter the Zip Code"
+			validatorMessage="Zip code must be number and within the predefined set and exactly 5 digits">
+			<f:ajax listener="#{survey.renderAll}" execute="#{zip}" event="keyup"
+				render="city state" />
+			<f:validateLength minimum="5" maximum="5" />
+		</p:inputText>
+		<h:message for="zip" style="color:blue" />
+		<br />
+		
+		<p>City:</p>
+		<p:inputText id="city" value="#{survey.student.city}" required="true"
+			requiredMessage="Enter the City"
+			validatorMessage="Enter only alphabets and numbers and should be less than or equal to 30 characters.">
+			<f:validateLength maximum="30" />
+		</p:inputText>
+		<h:message for="city" style="color:blue" />
+		<br />
+		
+		<p>State:</p>
+		<p:inputText id="state" value="#{survey.student.state}"
+			required="true" requiredMessage="Enter the State"
+			validatorMessage="Enter only alphabets and numbers and should be less than or equal to 30 characters.">
+			<f:validateLength maximum="30" />
+		</p:inputText>
+		<h:message for="state" style="color:blue" />
+		<br />
+
+		<p>Email:</p>
+		<p:inputText id="Email" value="#{survey.student.email}"
+			required="true" requiredMessage="Please enter an email id"
+			validatorMessage="Enter valid email id">
+			<f:validateRegex
+				pattern="^[_a-zA-z0-9]+(\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+.[\.a-zA-z]+[\.a-zA-z]*" />
+		</p:inputText>
+		<p:message for="Email" style="color:blue" />
+		<br />
+		
+		<p>Telephone:</p>
+		<p:inputMask mask="(999) 999-9999" value="#{survey.student.phone}"
+			required="true" id="Phone"
+			requiredMessage="PLease enter phone number and enter numbers only" />
+		<p:message for="Phone" class="error" />
+		<br />
+		
+		<p>Date of Survey:</p>
+		<p:calendar id="sdate" required="true"
+			value="#{survey.student.surveyDate}" binding="#{date1input}"
+			requiredMessage="You must enter the Date of Survey" />
+		<p:message for="sdate" style="color:blue" />
+		<br />
+		
+		<p>Semester Start Date:</p>
+		<p:calendar id="semdate" required="true"
+			requiredMessage="PLease enter a sem start date"
+			value="#{survey.student.semStartDate}"
+			validator="#{survey.dateAfter}">
+			<f:attribute name="dateOfSurvey" value="#{date1input}"></f:attribute>
+		</p:calendar>
+		<p:message for="semdate" style="color:blue" />
+		<br />
+		
+		<p>1. What did you like the most about the campus ?</p>
+		<p:selectManyCheckbox id="Chekbox"
+			value="#{survey.student.campusOptions}">
+			<f:selectItem itemValue="students" itemLabel="Students" />
+			<f:selectItem itemValue="location" itemLabel="Location" />
+			<f:selectItem itemValue="campus" itemLabel="Campus" />
+			<f:selectItem itemValue="atmosphere" itemLabel="Atmosphere" />
+			<f:selectItem itemValue="dormrooms" itemLabel="Dorm Rooms" />
+			<f:selectItem itemValue="sports" itemLabel="Sports" />
+		</p:selectManyCheckbox>
+		
+		<p>2.How did you know about the university?</p>
+		<p:selectOneRadio id="recommend"
+			value="#{survey.student.interestedIn}" layout="pageDirection">
+			<f:selectItem itemValue="friends" itemLabel="Friends" />
+			<f:selectItem itemValue="television" itemLabel="Television" />
+			<f:selectItem itemValue="internet" itemLabel="Internet" />
+			<f:selectItem itemValue="other" itemLabel="Other" />
+		</p:selectOneRadio>
+
+		<p>3. How likely are you going to recommend this university to a
+			friend or a family member?</p>
+		<br />
+		<p:autoComplete value="#{survey.student.recommendation}"
+			completeMethod="#{survey.display}" forceSelection="true"
+			minQueryLength="1" />
+		
+		<p>
+			4. Enter atleast 10 numbers ranging between 1 and 100 in the Raffle
+			field <br />
+		</p>
+		<h:outputLabel for="RaffleTicket" value="Raffle Ticket" />
+		<p:inputText id="RaffleTicket" value="#{survey.student.raffle}"
+			required="true" validator="#{survey.student.validateRaffle}"
+			requiredMessage="This field is mandatory"
+			validatorMessage="Enter only digits">
+		</p:inputText>
+		
+		<p:message for="RaffleTicket" style="color:blue" />
+		<p>Enter any additional comments:</p>
+		<p:inputTextarea value="#{survey.student.comments}" rows="5" cols="25">
+		</p:inputTextarea>
+		<br />
+		
+		<p:commandButton action="#{survey.submitAction}" value="Submit"
+			ajax="false" />
+		<p:button value="Cancel/Reset" outcome="Survey.xhtml"
+			ajax="false" />
+		<p:button value="Main Menu" outcome="index.xhtml"
+			ajax="false" />	
+		<p:button value="View Survey Details" outcome="ListSurvey.xhtml"
+			ajax="false" />
+		<p:button value="Search Survey Details" outcome="Search.xhtml"
+			ajax="false" />
+	</h:form>
+</h:body>
+</html>

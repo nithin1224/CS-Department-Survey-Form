@@ -1,0 +1,55 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- @author Nithin -->
+<!-- This page is used to perform the search operation on the student database -->
+
+<h:head>
+<title>Search Options</title>
+</h:head>
+<h:body>
+	<h:form>
+
+		<p>FirstName:</p>
+		<p:inputText id="firstname" value="#{searchbean.firstname}"
+			requiredMessage="Please enter your firstname"
+			validatorMessage="Enter only alphabetical text">
+			<f:validateLength maximum="15" />
+		</p:inputText>
+		<p:message for="firstname" class="error" />
+		<br />
+		
+		<p>LastName:</p>
+		<p:inputText id="lastname" value="#{searchbean.lastname}"
+			requiredMessage="Please enter your Lastname"
+			validatorMessage="Enter only alphabetical text">
+		</p:inputText>
+		<p:message for="lastname" class="error" />
+		<br />
+		
+		<p>City:</p>
+		<p:inputText id="city" value="#{searchbean.city}"
+			requiredMessage="Please enter your city"
+			validatorMessage="Enter only alphabetical text">
+		</p:inputText>
+		<p:message for="city" class="error" />
+		<br />
+		
+		<p>State:</p>
+		<p:inputText for="state" id="state" value="#{searchbean.state}"
+			requiredMessage="Please enter your state"
+			validatorMessage="Enter only alphabetical text">
+		</p:inputText>
+		<p:message for="state" class="error" />
+		<br />
+		<p:commandButton value="Search" action="#{searchbean.searchStudentSurvey}" ajax="false" />
+
+	</h:form>
+</h:body>
+</html>

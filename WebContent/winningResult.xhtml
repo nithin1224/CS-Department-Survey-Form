@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html">
+
+<!-- 
+ @author Nithin
+Description: This page gives an announcement whether the student is winner of two movie tickets. 
+-->
+
+<h:head>
+<title>Winner Acknowledgement</title>
+</h:head>
+
+<h:body>
+<h1>Thank you for completing the Survey.</h1>
+<h2>CONGRATULATIONS!You are the winner of 2 movie tickets.</h2>
+
+<p>Student Name : #{student.firstname} #{student.lastname}</p>
+
+<p> <b>Standard Deviation is:</b>  #{survey.wr.deviation}</p>
+<p> <b>Mean is:</b>  #{survey.wr.mean}</p>
+<br />
+
+<p>Information entered on the survey form has been saved successfully.</p>
+<br />
+
+<h:button value="View Survey Details" outcome="ListSurvey.xhtml"/>
+<h:button value="Go back to Main menu" outcome="index.xhtml"/>
+
+</h:body>
+</html>

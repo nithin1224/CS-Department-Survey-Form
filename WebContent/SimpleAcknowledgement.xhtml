@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html">
+<!-- 
+ @author Nithin
+Description: This page gives a simple acknowledgement that survey data saved to file successfully. 
+-->
+
+<h:head>
+<title>Simple Acknowledgement</title>	
+</h:head>
+<h:body>
+
+<h1><b> Thank you for completing the survey </b> </h1>
+<br />
+<p>Student Name : #{studentBean.firstname} #{studentBean.lastname}</p>
+
+<p> <b>Standard Deviation is:</b>  #{survey.wr.deviation}</p>
+<p> <b>Mean is:</b>  #{survey.wr.mean}</p>
+<br />
+
+<p>Information entered on the survey  form has been saved  successfully</p>
+<br />
+
+<h:button value="View Survey Details" outcome="ListSurvey.xhtml"></h:button>
+<h:button value="Go back to Main menu" outcome="index.xhtml"></h:button>
+</h:body>
+</html>

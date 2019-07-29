@@ -1,0 +1,96 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<!-- @author Nithin  -->
+<!-- This page displays and deletes the required data from the database -->
+
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:dataTable value="#{searchbean.studentList}" var="student"
+			border="2" styleClass="mainTable" captionClass="caption"
+			headerClass="heading">
+			
+			<h:column>
+				<f:facet name="header">First Name</f:facet>
+            #{student.firstname}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Last Name</f:facet>
+            #{student.lastname}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Street Address</f:facet>
+            #{student.address}
+             </h:column>
+			<h:column>
+				<f:facet name="header">City</f:facet>
+             #{student.city}
+            </h:column>
+			<h:column>
+				<f:facet name="header">State</f:facet>
+           #{student.state}
+               </h:column>
+			<h:column>
+				<f:facet name="header">Zip Code</f:facet>
+           #{student.zip}
+              </h:column>
+			<h:column>
+				<f:facet name="header">Telephone Number</f:facet>
+             #{student.phone}
+              </h:column>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+               #{student.email}
+               </h:column>
+			<h:column>
+				<f:facet name="header">SurveyDate</f:facet>
+              #{student.surveyDate}
+                </h:column>
+			<h:column>
+				<f:facet name="header">SemStartDate</f:facet>
+                 #{student.semStartDate}
+                  </h:column>
+
+			<h:column>
+				<f:facet name="header">Most admired</f:facet>
+             #{student.campusOptions}
+               </h:column>
+			<h:column>
+				<f:facet name="header">Interest in University?</f:facet>
+              #{student.interestedIn}
+               </h:column>
+			<h:column>
+				<f:facet name="header">Recommendation</f:facet>
+              #{student.recommendation}
+                </h:column>
+			<h:column>
+				<f:facet name="header">Raffle Ticket Number</f:facet>
+            #{student.raffle}
+           </h:column>
+			<h:column>
+				<f:facet name="header">Additional Comments</f:facet>
+            #{student.comments}
+             </h:column>
+             <h:column>
+				<h:commandButton value="Delete"
+					actionListener="#{searchbean.deleteRows(student.sid)}" ajax="true"
+					event="click" update="data">
+					<f:ajax update="data"></f:ajax>
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h1>For the updated List, Click the below link</h1>
+		<h:outputLink value="ListSurvey.xhtml">Updated List</h:outputLink>
+	</h:form>
+</h:body>
+</html>
